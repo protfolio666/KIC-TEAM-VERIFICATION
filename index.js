@@ -405,7 +405,7 @@ function formatDate(date) {
 }
 
 function getSpoilerMention(userId) {
-  return `||<@${userId}>||`;
+  return `<@${userId}>`;
 }
 
 function getNextVerificationId() {
@@ -936,7 +936,7 @@ function createVerifiedTeamEmbed(
 
   embed.setFooter({
     text:
-      "Team Verification System",
+      "Team Verification System ◉ Honor of Kings India",
   });
 
   return embed;
@@ -1943,7 +1943,7 @@ async function handleConfirmVerification(
       await verifiedChannel.send(
         {
           content:
-            "⚠️ If any information appears incorrect, please contact the tournament organizers via #🎟️┃𝖲𝗎𝗉𝗉𝗈𝗋𝗍-𝖢𝖾𝗇𝗍𝗋𝖾 .",
+            "⚠️ If any information appears incorrect, please contact the tournament organizers via <#1545348043467915334>.",
 
           embeds: [
             createVerifiedTeamEmbed(
