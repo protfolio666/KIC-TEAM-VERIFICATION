@@ -405,7 +405,7 @@ function formatDate(date) {
 }
 
 function getSpoilerMention(userId) {
-  return `||<@${userId}>||`;
+  return `<@${userId}>`;
 }
 
 function getNextVerificationId() {
