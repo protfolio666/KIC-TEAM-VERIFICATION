@@ -405,7 +405,7 @@ function formatDate(date) {
 }
 
 function getSpoilerMention(userId) {
-  return `<@${userId}>`;
+  return `||<@${userId}>||`;
 }
 
 function getNextVerificationId() {
@@ -1940,6 +1940,18 @@ async function handleConfirmVerification(
             member.user.id
         );
 
+      // De-duplicate the mention set: if the submitter is
+      // also one of the selected team members, their ID
+      // would otherwise appear twice and Discord rejects
+      // the request with
+      // allowed_mentions.users[...][SET_TYPE_ALREADY_CONTAINS_VALUE].
+      const allowedMentionUsers = [
+        ...new Set([
+          ...memberMentions,
+          interaction.user.id,
+        ]),
+      ];
+
       await verifiedChannel.send(
         {
           content:
@@ -1952,10 +1964,7 @@ async function handleConfirmVerification(
           ],
 
           allowedMentions: {
-            users: [
-              ...memberMentions,
-              interaction.user.id,
-            ],
+            users: allowedMentionUsers,
           },
         }
       );
